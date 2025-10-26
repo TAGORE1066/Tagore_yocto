@@ -1,22 +1,17 @@
-CC ?= ${CC}
-CFLAGS += -Wall
-LDFLAGS ?=
+CC = gcc
+CFLAGS = -Wall -Werror.
 
-PROGRAMS = hellomake evenodd primecheck
-
-all: $(PROGRAMS)
+all: hellomake evenodd primecheck
 
 hellomake: hellomake.c
-	$(CC) $(CFLAGS) -o hellomake hellomake.c $(LDFLAGS)
+	$(CC) $(CFLAGS) hellomake.c -o hellomake
 
 evenodd: evenodd.c
-	$(CC) $(CFLAGS) -o evenodd evenodd.c $(LDFLAGS)
+	$(CC) $(CFLAGS) evenodd.c -o evenodd
 
 primecheck: primecheck.c
-	$(CC) $(CFLAGS) -o primecheck primecheck.c $(LDFLAGS)
+	$(CC) $(CFLAGS) primecheck.c -o primecheck
 
 clean:
-	rm -f $(PROGRAMS)
-
-
+	rm -f hellomake evenodd primecheck
 

@@ -1,10 +1,9 @@
 DESCRIPTION = "receipe(.bb)filefor helloautoconf example"
 LICENSE = "CLOSED"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}:"
 
-SRC_URI = "file://configure.ac \
-           file://Makefile.am \
+SRC_URI = "file://src/configure.ac \
+           file://src/Makefile.am \
            file://src/main.c \
            file://src/add.c \
            file://src/multiply.c \
@@ -13,17 +12,13 @@ SRC_URI = "file://configure.ac \
 
 S = "${WORKDIR}"
 
-
-
 do_compile() {
-    ${CC} ${CFLAGS} ${LDFLAGS} \
-        src/main.c src/add.c src/multiply.c \
-        -I src -o helloautoconf
+	cd ${S}
+	${CC} ${CFLAGS} ${LDFLAGS}  src/main.c src/add.c src/multiply.c -o helloautoconf
 }
 
-
 do_install() {
-    install -d ${D}${bindir}
-    install -m 0755 helloautoconf ${D}${bindir}/helloautoconf
+    install -d ${D}/usr/bin
+    install -m 777 ${S}/helloautoconf ${D}/usr/bin
 }
 

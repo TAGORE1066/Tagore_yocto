@@ -1,4 +1,4 @@
-SUMMARY = "Simple C programs with CMake"
+DESCRIPTION = "Simple C programs with CMake"
 LICENSE = "CLOSED"
 
 SRC_URI = "file://helloc.c \
@@ -8,13 +8,17 @@ SRC_URI = "file://helloc.c \
 
 S = "${WORKDIR}"
 
-inherit cmake
+do_compile() {
+	cd ${S}
+	${CC} ${LDFLAGS} helloc.c -o helloc
+	${CC} ${LDFLAGS} addnumbers.c -o addnumbers
+	${CC} $LDFLAGS} greet.c -o greet
+}
 
-# Optional: Install binaries
 do_install() {
-    install -d ${D}${bindir}
-    install -m 0755 ${B}/helloc ${D}${bindir}
-    install -m 0755 ${B}/addnumbers ${D}${bindir}
-    install -m 0755 ${B}/greet ${D}${bindir}
+    install -d ${D}/usr/bin
+    install -m 777 ${S}/helloc ${D}/usr/bin
+    install -m 777 ${S}/addnumbers ${D}/usr/bin
+    install -m 777 ${S}/greet ${D}/usr/bin
 }
 

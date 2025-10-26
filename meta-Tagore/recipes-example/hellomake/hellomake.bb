@@ -11,13 +11,15 @@ S = "${WORKDIR}"
 
 
 do_compile() {
-    oe_runmake
+	${CC} ${LDFLAGS} hellomake.c -o hellomake
+	${CC} ${LDFLAGS} evenodd.c -o evenodd
+	${CC} ${LDFLAGS} primecheck.c -o primecheck
 }
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0755 hellomake ${D}${bindir}/hellomake
-    install -m 0755 evenodd ${D}${bindir}/evenodd
-    install -m 0755 primecheck ${D}${bindir}/primecheck
+    install -m 777 hellomake ${D}${bindir}/hellomake
+    install -m 777 evenodd ${D}${bindir}/evenodd
+    install -m 777 primecheck ${D}${bindir}/primecheck
 }
 
